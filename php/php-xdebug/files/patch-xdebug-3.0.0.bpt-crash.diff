@@ -1,0 +1,13 @@
+Resolve breakpoint removal crash in 3.0.0 release
+
+https://bugs.xdebug.org/view.php?id=1897
+--- src/debugger/handler_dbgp.c.orig	2020-11-25 06:52:48.000000000 -0500
++++ src/debugger/handler_dbgp.c	2020-12-02 19:26:30.000000000 -0500
+@@ -698,7 +698,6 @@
+ 				if (atoi(parts->args[1]) == brk_info->original_lineno && memcmp(ZSTR_VAL(brk_info->filename), parts->args[0], ZSTR_LEN(brk_info->filename)) == 0) {
+ 					xdebug_llist_remove(XG_DBG(context).line_breakpoints, le, NULL);
+ 					retval = SUCCESS;
+-					xdebug_arg_dtor(parts);
+ 					break;
+ 				}
+ 			}

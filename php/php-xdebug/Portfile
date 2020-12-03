@@ -73,6 +73,11 @@ extract.suffix          .tgz
 if {${name} ne ${subport}} {
     configure.args      --enable-xdebug
     
+
+	if {${version} == 3.0.0} {
+	    patchfiles          patch-xdebug-3.0.0.bpt-crash.diff	
+	}
+
     set xdebug_docs     ${homepage}/docs/
     notes "
 You can get a list of the available configuration settings for xdebug\
